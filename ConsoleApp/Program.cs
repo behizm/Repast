@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Repast.Console
+namespace ConsoleApp
 {
     class Program
     {
