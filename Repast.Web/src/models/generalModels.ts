@@ -33,6 +33,7 @@
     export class SimpleFoodModel {
         id: string;
         name: string;
+        lock: boolean;
     }
 
     export class PhaseModel {

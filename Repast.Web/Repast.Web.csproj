@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\client\service.ts" />
     <None Remove="src\models\generalModels.ts" />
   </ItemGroup>
 
@@ -26,6 +27,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="src\client\plan.ts" />
+    <TypeScriptCompile Include="src\client\service.ts" />
     <TypeScriptCompile Include="src\models\generalModels.ts" />
   </ItemGroup>
 

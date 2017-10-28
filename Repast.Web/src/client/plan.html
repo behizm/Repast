@@ -1,90 +1,96 @@
 ﻿<template>
-  <div style="background-color: #eee; padding: 20px; margin: 20px;">
-    <div>Phase Count</div>
-    <p>
-      <input type="text" value.bind="phaseModel.count" />
-    </p>
-    <div>Phase Length</div>
-    <p>
-      <input type="text" value.bind="phaseModel.length" />
-    </p>
-    <div>
-      <button click.delegate="createPlanFrom()">Confirm</button>
+  <div class="container">
+    <div class="panel panel-default" style="margin-top: 20px;">
+      <div class="panel-heading">Phase Options</div>
+      <div class="panel-body">
+        <div class="form-inline">
+          <div class="form-group">
+            <input type="text" value.bind="phaseModel.count" class="form-control" placeholder="Phase Count" />
+          </div>
+          <div class="form-group">
+            <input type="text" value.bind="phaseModel.length" class="form-control" placeholder="Phase Length" />
+          </div>
+          <button type="submit" class="btn btn-default" click.delegate="createPlanFrom()">Confirm</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default" style="margin-top: 20px;" if.bind="planSchema.length">
+      <div class="panel-heading">Plan</div>
+      <div class="panel-body">
+        <div repeat.for="innerSchema of planSchema">
+          <h3>
+            phase ${$index+1}
+          </h3>
+          <table class="table">
+            <tr>
+              <th width="5%">#</th>
+              <th width="15%">Main Part</th>
+              <th width="15%">Food Type</th>
+              <th width="15%">Difficulty</th>
+              <th width="50%"></th>
+            </tr>
+            <tr repeat.for="item of innerSchema">
+              <td>${$index+1}</td>
+              <td>
+                <select value.bind="item.mainPartType" disabled.bind="foodPlan[$parent.$index][$index]" class="form-control">
+                  <option model.bind="null"></option>
+                  <option model.bind="1">Meal</option>
+                  <option model.bind="2">Chicken</option>
+                  <option model.bind="3">Sea</option>
+                  <option model.bind="4">Vegetables</option>
+                </select>
+              </td>
+              <td>
+                <select value.bind="item.foodType" disabled.bind="foodPlan[$parent.$index][$index]" class="form-control">
+                  <option model.bind="null"></option>
+                  <option model.bind="1">Stew</option>
+                  <option model.bind="2">Rice</option>
+                  <option model.bind="3">Bread</option>
+                  <option model.bind="4">Dish</option>
+                </select>
+              </td>
+              <td>
+                <select value.bind="item.difficultyType" disabled.bind="foodPlan[$parent.$index][$index]" class="form-control">
+                  <option model.bind="null"></option>
+                  <option model.bind="1">Very Low</option>
+                  <option model.bind="2">Low</option>
+                  <option model.bind="3">Medium</option>
+                  <option model.bind="4">High</option>
+                  <option model.bind="5">Very High</option>
+                </select>
+              </td>
+              <td style="vertical-align: middle;">
+                <button click.delegate="getFood($parent.$index,$index)" 
+                        if.bind="!foodPlan[$parent.$index][$index]" class="btn btn-default">
+                  <i class="glyphicon glyphicon-arrow-right"></i>
+                </button>
+                <button click.delegate="getFood($parent.$index,$index)" 
+                        if.bind="foodPlan[$parent.$index][$index]" class="btn btn-default">
+                  <i class="glyphicon glyphicon-random"></i>
+                </button>
+                <button click.delegate="clearFood($parent.$index,$index)" class="btn btn-default" if.bind="foodPlan[$parent.$index][$index]">
+                  ${foodPlan[$parent.$index][$index].name}
+                  <i class="glyphicon glyphicon-remove"></i>
+                </button>
+                <button click.delegate="changeLock($parent.$index,$index)"
+                   if.bind="foodPlan[$parent.$index][$index] && !foodPlan[$parent.$index][$index].lock"
+                   class="btn btn-default">
+                  <i class="glyphicon glyphicon-lock"></i>
+                </button>
+                <button click.delegate="changeLock($parent.$index,$index)"
+                        if.bind="foodPlan[$parent.$index][$index] && foodPlan[$parent.$index][$index].lock"
+                        class="btn btn-default active">
+                  <i class="glyphicon glyphicon-lock"></i>
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <br />
+          <button click.delegate="submitPlan()" class="btn btn-primary" disabled.bind="!sourceFoods.length">Generate Plan</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div style="background-color: #eee; padding: 20px; margin: 20px;">
-    <div repeat.for="innerSchema of planSchema">
-      <h3>
-        phase ${$index+1}
-      </h3>
-      <table>
-        <tr>
-          <th></th>
-          <th>Main Part</th>
-          <th>Food Type</th>
-          <th>Difficulty</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr repeat.for="item of innerSchema">
-          <td>${$index+1}</td>
-          <td>
-            <select value.bind="item.mainPartType">
-              <option model.bind="null"></option>
-              <option model.bind="1">Meal</option>
-              <option model.bind="2">Chicken</option>
-              <option model.bind="3">Sea</option>
-              <option model.bind="4">Vegetables</option>
-            </select>
-          </td>
-          <td>
-            <select value.bind="item.foodType">
-              <option model.bind="null"></option>
-              <option model.bind="1">Stew</option>
-              <option model.bind="2">Rice</option>
-              <option model.bind="3">Bread</option>
-              <option model.bind="4">Dish</option>
-            </select>
-          </td>
-          <td>
-            <select value.bind="item.difficultyType">
-              <option model.bind="null"></option>
-              <option model.bind="1">Very Low</option>
-              <option model.bind="2">Low</option>
-              <option model.bind="3">Medium</option>
-              <option model.bind="4">High</option>
-              <option model.bind="5">Very High</option>
-            </select>
-          </td>
-          <td>
-            <a href="#" click.delegate="getFood($parent.$index,$index)">get</a>
-          </td>
-          <td>${foodPlan[$parent.$index][$index].name}</td>
-        </tr>
-      </table>
-    </div>
-    <div>
-      <br />
-      <button click.delegate="submitPlan()">Confirm</button>
-    </div>
-  </div>
-  <!--<div style="background-color: #eee; padding: 20px; margin: 20px;">
-    <div repeat.for="phasePlan of foodPlan">
-      <h3>
-        phase ${$index+1}
-      </h3>
-      <table>
-        <tr>
-          <th></th>
-          <th>Food Name</th>
-        </tr>
-        <tr repeat.for="item of phasePlan">
-          <td>${$index+1} - </td>
-          <td>
-            ${item.name}
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>-->
 </template>
