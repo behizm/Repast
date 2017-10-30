@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\admin\foods.ts" />
+    <None Remove="src\admin\service.ts" />
     <None Remove="src\client\service.ts" />
     <None Remove="src\models\generalModels.ts" />
+    <None Remove="src\models\value-converter.ts" />
   </ItemGroup>
 
 
@@ -26,13 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\admin\food\item.ts" />
+    <TypeScriptCompile Include="src\admin\food\add.ts" />
+    <TypeScriptCompile Include="src\admin\food\foods.ts" />
+    <TypeScriptCompile Include="src\admin\food\service.ts" />
     <TypeScriptCompile Include="src\client\plan.ts" />
     <TypeScriptCompile Include="src\client\service.ts" />
     <TypeScriptCompile Include="src\models\generalModels.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="src\admin\" />
+    <TypeScriptCompile Include="src\models\value-converter.ts" />
   </ItemGroup>
 
 </Project>

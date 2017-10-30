@@ -1,7 +1,7 @@
 ﻿export module Models {
 
     export class FoodModel {
-        id: string;
+        id: number;
         name: string;
         mainPart: MainPartType;
         type: FoodType;
@@ -31,7 +31,7 @@
     }
 
     export class SimpleFoodModel {
-        id: string;
+        id: number;
         name: string;
         lock: boolean;
     }

@@ -1,0 +1,40 @@
+﻿<template>
+  <div class="container">
+    <require from="../../models/value-converter"></require>
+
+    <div class="panel panel-default" style="margin-top: 20px;">
+      <div class="panel-heading">Foods List</div>
+      <div class="panel-body">
+        <div>
+          <a route-href="route: addFood" class="btn btn-primary">
+            <i class="glyphicon glyphicon-plus"></i>
+            Add
+          </a>
+        </div>
+      </div>
+      <table class="table table-condensed table-hover">
+        <tr>
+          <th width="5%">#</th>
+          <th width="30%">Name</th>
+          <th width="15%">Main Part</th>
+          <th width="15%">Food Type</th>
+          <th width="15%">Difficulty</th>
+          <th width="20%"></th>
+        </tr>
+        <tr repeat.for="item of foodsList">
+          <td>${$index+1}</td>
+          <td>${item.name}</td>
+          <td>${item.mainPart | mainPartTypeToText}</td>
+          <td>${item.type | foodTypeToText}</td>
+          <td>${item.difficulty | difficultyTypeToText}</td>
+          <td>
+            <a route-href="route: foodDetails; params.bind: { id : item.id }" class="btn btn-default btn-xs" style="line-height: 1;">
+              <i class="glyphicon glyphicon-option-horizontal"></i>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</template>

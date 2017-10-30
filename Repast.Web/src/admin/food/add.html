@@ -1,0 +1,67 @@
+﻿<template>
+  <div class="container">
+
+    <div class="panel panel-default" style="margin-top: 20px;">
+      <div class="panel-heading">Add Food</div>
+      <div class="panel-body">
+        <div class="row">
+          <form class="form-horizontal col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Name</label>
+              <div class="col-sm-9">
+                <input type="text" value.from-view="foodModel.name" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Main Part</label>
+              <div class="col-sm-9">
+                <select value.from-view="foodModel.mainPart" class="form-control">
+                  <option model.bind="null"></option>
+                  <option model.bind="1">Meal</option>
+                  <option model.bind="2">Chicken</option>
+                  <option model.bind="3">Sea</option>
+                  <option model.bind="4">Vegetables</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Food Type</label>
+              <div class="col-sm-9">
+                <select value.from-view="foodModel.foodType" class="form-control">
+                  <option model.bind="null"></option>
+                  <option model.bind="1">Stew</option>
+                  <option model.bind="2">Rice</option>
+                  <option model.bind="3">Bread</option>
+                  <option model.bind="4">Dish</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">Difficulty Type</label>
+              <div class="col-sm-9">
+                <select value.from-view="foodModel.difficultyType" class="form-control">
+                  <option model.bind="null"></option>
+                  <option model.bind="1">Very Low</option>
+                  <option model.bind="2">Low</option>
+                  <option model.bind="3">Medium</option>
+                  <option model.bind="4">High</option>
+                  <option model.bind="5">Very High</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-default" click.delegate="submit()">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <a route-href="route: foodsList">
+          <i class="glyphicon glyphicon-chevron-left"></i>
+          Back To List
+        </a>
+      </div>
+    </div>
+
+  </div>
+</template>

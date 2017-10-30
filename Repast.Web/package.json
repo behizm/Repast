@@ -14,9 +14,11 @@
     "aurelia-http-client": "^1.2.1",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",
+    "fetch": "^1.1.0",
     "jquery": "^2.2.4",
     "requirejs": "^2.3.2",
-    "text": "github:requirejs/text#latest"
+    "text": "github:requirejs/text#latest",
+    "whatwg-fetch": "^2.0.3"
   },
   "peerDependencies": {},
   "devDependencies": {

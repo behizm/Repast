@@ -41,7 +41,13 @@ namespace Repast.Web
       services.AddCors(options =>
       {
         options.AddPolicy("AllowSpecificOrigin",
-            builder => builder.AllowAnyOrigin());
+            builder =>
+              builder
+                .AllowAnyOrigin()
+                //.WithOrigins("http://localhost:9001")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+              );
       });
     }
 
