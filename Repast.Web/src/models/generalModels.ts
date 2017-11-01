@@ -1,5 +1,16 @@
 ﻿export module Models {
 
+    export class HttpResultModel {
+        isSuccess: boolean;
+        message?: string;
+        data?: any;
+    }
+
+    export class ResultModel {
+        isSuccess?: boolean;
+        message?: string;
+    }
+
     export class FoodModel {
         id: number;
         name: string;

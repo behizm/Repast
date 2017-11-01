@@ -50,10 +50,10 @@ namespace Repast.Web.Models
     public MainPartType? mainPart { get; set; }
 
     [Required]
-    public FoodType? foodType { get; set; }
+    public FoodType? type { get; set; }
 
     [Required]
-    public DifficultyType? difficultyType { get; set; }
+    public DifficultyType? difficulty { get; set; }
   }
 
   public class FoodUpdateModel
@@ -68,10 +68,10 @@ namespace Repast.Web.Models
     public MainPartType? mainPart { get; set; }
 
     [Required]
-    public FoodType? foodType { get; set; }
+    public FoodType? type { get; set; }
 
     [Required]
-    public DifficultyType? difficultyType { get; set; }
+    public DifficultyType? difficulty { get; set; }
   }
 
   public class FoodJsonContext

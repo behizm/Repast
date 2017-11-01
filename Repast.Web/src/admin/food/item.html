@@ -32,17 +32,16 @@
             </div>
           </div>
         </form>
-
         <br />
         <div class="text-center">
-          <a route-href="route: addFood" class="btn btn-default">
+          <a if.bind="foodItem.id" route-href="route: editFood; params.bind: { id : foodItem.id }" class="btn btn-default">
             <i class="glyphicon glyphicon-pencil"></i>
             Edit
           </a>
-          <a route-href="route: addFood" class="btn btn-default">
+          <button type="submit" class="btn btn-default" click.delegate="deleteFood(foodItem.id)">
             <i class="glyphicon glyphicon-trash"></i>
             Delete
-          </a>
+          </button>
         </div>
 
         <a route-href="route: foodsList">

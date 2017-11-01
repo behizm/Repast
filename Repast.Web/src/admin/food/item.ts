@@ -1,14 +1,15 @@
 ﻿import { Models } from '../../models/generalModels';
-import { inject } from 'aurelia-framework';
+import { autoinject } from 'aurelia-dependency-injection';
+import { Router } from "aurelia-router";
 import { AdminService } from './service';
 
-@inject(AdminService)
+@autoinject
 export class Item {
 
-    constructor(private adminService: AdminService) { }
+    constructor(private adminService: AdminService, private router: Router) { }
 
     activate = (params): void => {
-        var id = Number(params.id);
+        const id = Number(params.id);
         if (id) {
             this.adminService.getFood(params.id).then(r => {
                 this.foodItem = r
@@ -18,4 +19,12 @@ export class Item {
 
     foodItem: Models.FoodModel;
 
+    deleteFood = (id: number): void => {
+        this.adminService.deleteFood(id).then(r => {
+            if (r.isSuccess) {
+                var url = this.router.generate("foodsList");
+                this.router.navigate(url);
+            }
+        });        
+    }
 }

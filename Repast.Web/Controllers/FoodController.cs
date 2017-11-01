@@ -44,18 +44,18 @@ namespace Repast.Web.Controllers
       {
         return BadRequest(ModelState);
       }
-      var exictedFood = foodContext.Data.FirstOrDefault(x => x.name == model.name);
+      var exictedFood = foodContext.Data.FirstOrDefault(x => x.name.Equals(model.name, System.StringComparison.OrdinalIgnoreCase));
       if (exictedFood != null)
       {
-        return BadRequest("duplicate food name");
+        return BadRequest(new { message = "duplicated food name." });
       }
       var newFood = new FoodModel
       {
         id = this.foodContext.Data.Max(x => x.id) + 1,
-        difficulty = model.difficultyType.Value,
+        difficulty = model.difficulty.Value,
         mainPart = model.mainPart.Value,
         name = model.name,
-        type = model.foodType.Value
+        type = model.type.Value
       };
       this.foodContext.Data.Add(newFood);
       this.foodContext.SaveChanges();
@@ -78,17 +78,17 @@ namespace Repast.Web.Controllers
       {
         return NotFound();
       }
-      var duplicatedFood = foodContext.Data.FirstOrDefault(x => x.name == model.name && x.id != model.id);
+      var duplicatedFood = foodContext.Data.FirstOrDefault(x => x.name.Equals(model.name, System.StringComparison.OrdinalIgnoreCase) && x.id != model.id);
       if (duplicatedFood != null)
       {
         return BadRequest("Duplicate in food name");
       }
       food.name = model.name;
       food.mainPart = model.mainPart.Value;
-      food.type = model.foodType.Value;
-      food.difficulty = model.difficultyType.Value;
+      food.type = model.type.Value;
+      food.difficulty = model.difficulty.Value;
       this.foodContext.SaveChanges();
-      return NoContent();
+      return Ok();
     }
 
     [HttpDelete("{id}")]
@@ -101,7 +101,7 @@ namespace Repast.Web.Controllers
       }
       this.foodContext.Data.Remove(food);
       this.foodContext.SaveChanges();
-      return NoContent();
+      return Ok();
     }
 
   }

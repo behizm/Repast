@@ -58,12 +58,6 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "aurelia-http-client",
-          "aurelia-fetch-client",
-          {
-            "name": "fetch",
-            "path": "../node_modules/whatwg-fetch",
-            "main":  "fetch"
-          },
           {
             "name": "aurelia-templating-resources",
             "path": "../node_modules/aurelia-templating-resources/dist/amd",
@@ -91,7 +85,23 @@
               "css/bootstrap.css"
             ]
           },
-          "text"
+          "text",
+          {
+            "name": "aurelia-validation",
+            "path": "../node_modules/aurelia-validation/dist/amd",
+            "main": "aurelia-validation"
+          },
+          {
+            "name": "devextreme",
+            "path": "../node_modules/devextreme/dist",
+            "main": "js/dx.web.debug",
+            "deps": [ "jquery" ],
+            "exports": "$",
+            "resources": [
+              "css/dx.common.css",
+              "css/dx.light.css"
+            ]
+          }
         ]
       }
     ],

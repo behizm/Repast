@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="src\admin\foods.ts" />
+    <None Remove="src\admin\food\edit.ts" />
     <None Remove="src\admin\service.ts" />
     <None Remove="src\client\service.ts" />
     <None Remove="src\models\generalModels.ts" />
@@ -29,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\admin\food\edit.ts" />
     <TypeScriptCompile Include="src\admin\food\item.ts" />
     <TypeScriptCompile Include="src\admin\food\add.ts" />
     <TypeScriptCompile Include="src\admin\food\foods.ts" />
