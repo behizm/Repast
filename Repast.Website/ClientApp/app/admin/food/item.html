@@ -1,0 +1,66 @@
+﻿<template>
+    <require from="../../models/value-converter"></require>
+
+    <div class="ui attached info message">
+        <h4>Food Details</h4>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui grid">
+            <div class="row centered">
+                <div class="sixteen wide mobile eight wide tablet six wide computer column">
+                    <table class="ui very basic celled table">
+                        <tbody>
+                            <tr>
+                                <td class="right aligned" width="50%">
+                                    <h4>Name</h4>
+                                </td>
+                                <td>${foodItem.name}</td>
+                            </tr>
+                            <tr>
+                                <td class="right aligned">
+                                    <h4>Main Part</h4>
+                                </td>
+                                <td>${foodItem.mainPart | mainPartTypeToText}</td>
+                            </tr>
+                            <tr>
+                                <td class="right aligned">
+                                    <h4>Food Type</h4>
+                                </td>
+                                <td>${foodItem.type | foodTypeToText}</td>
+                            </tr>
+                            <tr>
+                                <td class="right aligned">
+                                    <h4>Difficulty</h4>
+                                </td>
+                                <td>${foodItem.difficulty | difficultyTypeToText}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row centered">
+                <div class="sixteen wide mobile eight wide tablet six wide computer column" style="text-align: center;">
+                    <div class="two ui buttons">
+                        <a if.bind="foodItem.id" route-href="route: editFood; params.bind: { id : foodItem.id }"
+                           class="ui green basic button">
+                            <i class="write icon"></i>
+                            Edit
+                        </a>
+                        <button click.delegate="deleteFood(foodItem.id)"
+                                class="ui red basic button">
+                            <i class="trash outline icon"></i>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui bottom attached secondary segment">
+        <a route-href="route: foodsList">
+            <i class="chevron left icon"></i>
+            Back To List
+        </a>
+    </div>
+
+</template>

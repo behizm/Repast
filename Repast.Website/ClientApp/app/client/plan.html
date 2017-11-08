@@ -1,0 +1,101 @@
+﻿<template>
+
+    <div class="ui grid">
+        <div class="sixteen wide mobile eight wide tablet six wide computer column">
+            <h4 class="ui top attached block header">
+                Phase Options
+            </h4>
+            <div class="ui bottom attached segment">
+                <form submit.trigger="phaseModel.count && phaseModel.length && createPlanFrom()" class="ui form" novalidate>
+                    <div class="field">
+                        <label>Phase Count</label>
+                        <input type="text" value.bind="phaseModel.count" placeholder="Phase Count" />
+                    </div>
+                    <div class="field">
+                        <label>Phase Length</label>
+                        <input type="text" value.bind="phaseModel.length" placeholder="Phase Length" />
+                    </div>
+                    <button disabled.bind="!(phaseModel.count && phaseModel.length)"
+                            class="ui primary basic  button" type="submit">
+                        Confirm
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div repeat.for="innerSchema of planSchema" style="margin-top: 20px;">
+        <div class="ui attached info message">
+            <h4>Phase #${$index+1}</h4>
+        </div>
+        <div class="ui attached block header">
+            <div class="ui form">
+                <div class="inline fields" style="margin-bottom: 0;">
+                    <div class="three wide field">Main Part</div>
+                    <div class="three wide field">Food Type</div>
+                    <div class="three wide field">Difficulty</div>
+                </div>
+            </div>
+        </div>
+        <div class="ui ${($index+1==innerSchema.length)?'bottom':''} attached segment" repeat.for="item of innerSchema">
+            <div class="ui form">
+                <div class="inline fields" style="margin-bottom: 0;">
+                    <div class="three wide field">
+                        <select value.bind="item.mainPartType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui dropdown">
+                            <option model.bind="null"></option>
+                            <option model.bind="1">Meal</option>
+                            <option model.bind="2">Chicken</option>
+                            <option model.bind="3">Sea</option>
+                            <option model.bind="4">Vegetables</option>
+                        </select>
+                    </div>
+                    <div class="three wide field">
+                        <select value.bind="item.foodType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui dropdown">
+                            <option model.bind="null"></option>
+                            <option model.bind="1">Stew</option>
+                            <option model.bind="2">Rice</option>
+                            <option model.bind="3">Bread</option>
+                            <option model.bind="4">Dish</option>
+                        </select>
+                    </div>
+                    <div class="three wide field">
+                        <select value.bind="item.difficultyType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui dropdown">
+                            <option model.bind="null"></option>
+                            <option model.bind="1">Very Low</option>
+                            <option model.bind="2">Low</option>
+                            <option model.bind="3">Medium</option>
+                            <option model.bind="4">High</option>
+                            <option model.bind="5">Very High</option>
+                        </select>
+                    </div>
+                    <div class="seven wide field">
+                        <button click.delegate="getFood($parent.$index,$index)"
+                                disabled.bind="foodPlan[$parent.$index][$index].lock"
+                                class="ui icon basic button">
+                            <i class="${foodPlan[$parent.$index][$index].name ? 'random' : 'chevron right'} icon"></i>
+                        </button>
+                        <div if.bind="foodPlan[$parent.$index][$index].name"
+                             class="ui left pointing teal basic large label">
+                            ${foodPlan[$parent.$index][$index].name}
+                            <i click.delegate="clearFood($parent.$index,$index)"
+                               class="delete icon"></i>
+                        </div>
+                        <i click.delegate="changeLock($parent.$index,$index)"
+                           if.bind="foodPlan[$parent.$index][$index].name"
+                           style="margin-left: 5px;"
+                           class="ui ${foodPlan[$parent.$index][$index].lock ? 'yellow lock' : 'grey unlock'} icon">
+                        </i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div if.bind="planSchema.length" style="margin-top: 20px;">
+        <button click.delegate="submitPlan()" class="ui teal basic button" type="submit">
+            <i class="lightning icon"></i>
+            Generate Plan
+        </button>
+    </div>
+
+</template>

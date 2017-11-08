@@ -1,0 +1,40 @@
+﻿<template>
+    <require from="../../models/value-converter"></require>
+
+    <div class="ui attached info message">
+        <h4>Foods List</h4>
+    </div>
+    <div class="ui attached segment">
+        <a route-href="route: addFood" class="ui green basic button">
+            <i class="plus icon"></i>
+            New Food
+        </a>
+    </div>
+    <table class="ui bottom attached selectable table">
+        <thead>
+            <tr>
+                <th width="5%">#</th>
+                <th width="30%">Name</th>
+                <th width="15%">Main Part</th>
+                <th width="15%">Food Type</th>
+                <th width="15%">Difficulty</th>
+                <th width="20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr repeat.for="item of foodsList">
+                <td>${$index+1}</td>
+                <td>${item.name}</td>
+                <td>${item.mainPart | mainPartTypeToText}</td>
+                <td>${item.type | foodTypeToText}</td>
+                <td>${item.difficulty | difficultyTypeToText}</td>
+                <td class="right aligned">
+                    <a route-href="route: foodDetails; params.bind: { id : item.id }" class="">
+                        <i class="configure icon"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</template>

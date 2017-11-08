@@ -94,7 +94,7 @@
           {
             "name": "devextreme",
             "path": "../node_modules/devextreme/dist",
-            "main": "js/dx.web.debug",
+            "main": "js/dx.all",
             "deps": [ "jquery" ],
             "exports": "$",
             "resources": [
