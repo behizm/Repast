@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{3D738070-A473-4D31-8006-6A70C8836071}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repast.Web", "Repast.Web\Repast.Web.csproj", "{7056958E-4052-40D7-B88B-E9949CAABC14}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repast.Website", "Repast.Website\Repast.Website.csproj", "{49DE8792-932B-41FE-A9B5-13F04E017E62}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{3D738070-A473-4D31-8006-6A70C8836071}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D738070-A473-4D31-8006-6A70C8836071}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D738070-A473-4D31-8006-6A70C8836071}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7056958E-4052-40D7-B88B-E9949CAABC14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7056958E-4052-40D7-B88B-E9949CAABC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7056958E-4052-40D7-B88B-E9949CAABC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7056958E-4052-40D7-B88B-E9949CAABC14}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49DE8792-932B-41FE-A9B5-13F04E017E62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49DE8792-932B-41FE-A9B5-13F04E017E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49DE8792-932B-41FE-A9B5-13F04E017E62}.Release|Any CPU.ActiveCfg = Release|Any CPU

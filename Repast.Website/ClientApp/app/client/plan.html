@@ -6,19 +6,28 @@
                 Phase Options
             </h4>
             <div class="ui bottom attached segment">
-                <form submit.trigger="phaseModel.count && phaseModel.length && createPlanFrom()" class="ui form" novalidate>
-                    <div class="field">
+                <form submit.trigger="submitPhaseForm()" class="ui form" novalidate>
+                    <div class="field" validation-errors.bind="phaseCountErrors">
                         <label>Phase Count</label>
-                        <input type="text" value.bind="phaseModel.count" placeholder="Phase Count" />
+                        <input type="text" value.bind="phaseModel.count & validate" placeholder="Phase Count" />
+                        <div class="field error">
+                            <label repeat.for="errorInfo of phaseCountErrors">
+                                <i class="warning icon"></i>
+                                ${errorInfo.error.message}
+                            </label>
+                        </div>
                     </div>
-                    <div class="field">
+                    <div class="field" validation-errors.bind="phaseLengthErrors">
                         <label>Phase Length</label>
-                        <input type="text" value.bind="phaseModel.length" placeholder="Phase Length" />
+                        <input type="text" value.bind="phaseModel.length & validate" placeholder="Phase Length" />
+                        <div class="field error">
+                            <label repeat.for="errorInfo of phaseLengthErrors">
+                                <i class="warning icon"></i>
+                                ${errorInfo.error.message}
+                            </label>
+                        </div>
                     </div>
-                    <button disabled.bind="!(phaseModel.count && phaseModel.length)"
-                            class="ui primary basic  button" type="submit">
-                        Confirm
-                    </button>
+                    <button class="ui primary basic  button" type="submit">Confirm</button>
                 </form>
             </div>
         </div>

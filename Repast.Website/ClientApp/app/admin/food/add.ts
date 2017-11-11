@@ -1,16 +1,15 @@
 ﻿import { Models } from '../../models/generalModels';
-import { inject, NewInstance } from 'aurelia-framework';
+import { autoinject } from 'aurelia-framework';
 import { AdminService } from './service';
 import { ValidationRules, ValidationController, validateTrigger } from 'aurelia-validation';
 
-@inject(AdminService, NewInstance.of(ValidationController))
+@autoinject
 export class Add {
 
     constructor(private adminService: AdminService, private controller: ValidationController) { }
 
     activate = (): void => {
         this.configValidations();
-        this.controller.validate();
     }
 
     created() { }

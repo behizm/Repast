@@ -1,5 +1,106 @@
 ﻿<template>
-  <div class="container">
+
+
+    <div class="ui attached info message">
+        <h4>Edit Food</h4>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui centered grid">
+            <div class="sixteen wide mobile eight wide tablet six wide computer column">
+
+                <div class="ui negative message" if.bind="editFoodResult.isSuccess === false">
+                    <i class="close icon" click.delegate="editFoodResult={}"></i>
+                    <div if.bind="editFoodResult.message" class="header">
+                        ${editFoodResult.message}
+                    </div>
+                    <div if.bind="!editFoodResult.message" class="header">
+                        Error occurred during adding of food.
+                    </div>
+                </div>
+
+                <form submit.trigger="submit()" class="ui form">
+                    <div class="field" validation-errors.bind="nameErrors">
+                        <label>Food Name</label>
+                        <input type="text" value.bind="foodModel.name & validate" />
+                        <div class="field error" repeat.for="errorInfo of nameErrors">
+                            <label>
+                                <i class="warning icon"></i>
+                                ${errorInfo.error.message}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field" validation-errors.bind="mainPartErrors">
+                        <label>Main Part</label>
+                        <select value.bind="foodModel.mainPart & validate">
+                            <option model.bind="null"></option>
+                            <option model.bind="1">Meal</option>
+                            <option model.bind="2">Chicken</option>
+                            <option model.bind="3">Sea</option>
+                            <option model.bind="4">Vegetables</option>
+                        </select>
+                        <div class="field error" repeat.for="errorInfo of mainPartErrors">
+                            <label>
+                                <i class="warning icon"></i>
+                                ${errorInfo.error.message}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field" validation-errors.bind="typeErrors">
+                        <label>Food Type</label>
+                        <select value.bind="foodModel.type & validate">
+                            <option model.bind="null"></option>
+                            <option model.bind="1">Stew</option>
+                            <option model.bind="2">Rice</option>
+                            <option model.bind="3">Bread</option>
+                            <option model.bind="4">Dish</option>
+                        </select>
+                        <div class="field error" repeat.for="errorInfo of typeErrors">
+                            <label>
+                                <i class="warning icon"></i>
+                                ${errorInfo.error.message}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field" validation-errors.bind="difficultyErrors">
+                        <label>Difficulty</label>
+                        <select value.bind="foodModel.difficulty & validate">
+                            <option model.bind="null"></option>
+                            <option model.bind="1">Very Low</option>
+                            <option model.bind="2">Low</option>
+                            <option model.bind="3">Medium</option>
+                            <option model.bind="4">High</option>
+                            <option model.bind="5">Very High</option>
+                        </select>
+                        <div class="field error" repeat.for="errorInfo of difficultyErrors">
+                            <label>
+                                <i class="warning icon"></i>
+                                ${errorInfo.error.message}
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="ui teal basic button">
+                        <i class="save icon"></i>
+                        Save
+                    </button>
+                    <a if.bind="foodModel" route-href="route: foodDetails; params.bind: { id : foodModel.id }" class="ui basic button">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="ui bottom attached secondary segment">
+        <a route-href="route: foodsList">
+            <i class="chevron left icon"></i>
+            Back To List
+        </a>
+    </div>
+
+
+
+
+
+
+
+  <!--<div class="container">
 
     <div class="panel panel-default" style="margin-top: 20px;">
       <div class="panel-heading">Edit Food</div>
@@ -80,5 +181,6 @@
       </div>
     </div>
 
-  </div>
+  </div>-->
+
 </template>

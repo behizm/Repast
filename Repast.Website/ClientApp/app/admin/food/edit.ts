@@ -1,22 +1,21 @@
 ﻿import { Models } from '../../models/generalModels';
-import { inject, NewInstance } from 'aurelia-framework';
+import { autoinject } from 'aurelia-framework';
 import { ValidationRules, ValidationController, validateTrigger } from 'aurelia-validation';
 import { Router } from "aurelia-router";
 import { AdminService } from './service';
 
-@inject(AdminService, NewInstance.of(ValidationController), Router)
+@autoinject
 export class Edit {
 
     constructor(private adminService: AdminService, private controller: ValidationController, private router: Router) { }
 
-    activate = (params:any): void => {
+    activate = (params: any): void => {
         const id = Number(params.id);
         if (id) {
             this.adminService.getFood(id).then(r => {
                 if (r) {
                     this.foodModel = r;
                     this.configValidations();
-                    this.controller.validate();
                 }
             });
         }
@@ -52,7 +51,6 @@ export class Edit {
                 });
             }
         });
-
     }
 
 }

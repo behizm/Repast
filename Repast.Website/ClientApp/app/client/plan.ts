@@ -1,29 +1,49 @@
 ﻿import { Models } from '../models/generalModels';
-import { bindable, inject } from 'aurelia-framework';
+import { autoinject } from 'aurelia-framework';
 import { PlanService } from './service';
+import { ValidationRules, ValidationController, validateTrigger } from 'aurelia-validation';
 
-@inject(PlanService)
+@autoinject
 export class Plan {
 
-    constructor(private planService: PlanService) {
+    constructor(private planService: PlanService, private controller: ValidationController) {
         planService.getAllFoods().then(r => this.sourceFoods = r);
+        this.configValidations();
     }
-    
+
     sourceFoods: Models.FoodModel[];
-    phaseModel: Models.PhaseModel;
+    phaseModel: Models.PhaseModel = new Models.PhaseModel();
     planSchema: Models.PlanModel[][] = [];
     foodPlan: Models.SimpleFoodModel[][] = [];
 
-    createPlanFrom = (): void => {
-        if (!this.phaseModel) {
-            return;
-        }
-        const phaseCount = Number(this.phaseModel.count);
-        const phaseLength = Number(this.phaseModel.length);
-        if (!phaseCount || !phaseLength || phaseCount < 1 || phaseCount > 4 || phaseLength < 1 || phaseLength > 7) {
-            return;
-        }
+    configValidations = (): void => {
+        this.controller.validateTrigger = validateTrigger.changeOrBlur;
 
+        ValidationRules.customRule('integerRange', (value, obj, min, max) => {
+            if (value === null || value === undefined) {
+                return true;
+            }
+            let val = Number(value);
+            return val >= min && val <= max;
+        },
+            `\${$displayName} must be an integer between \${$config.min} and \${$config.max}.`,
+            (min, max) => ({ min, max }));
+
+        ValidationRules
+            .ensure((x: Models.PhaseModel) => x.count).displayName('Phase Count').required().satisfiesRule("integerRange", 1, 4)
+            .ensure((x: Models.PhaseModel) => x.length).displayName('Phase Length').required().satisfiesRule("integerRange", 1, 7)
+            .on(this.phaseModel);
+    }
+
+    submitPhaseForm = (): void => {
+        this.controller.validate({ object: this.phaseModel }).then(x => {
+            if (x.valid) {
+                this.createPlanSchema();
+            }
+        });
+    }
+
+    createPlanSchema = (): void => {
         const planSchemaCopy: Models.PlanModel[][] = [];
         const foodPlanCopy: Models.SimpleFoodModel[][] = [];
         for (var i = 0; i < this.phaseModel.count; i++) {
@@ -79,7 +99,7 @@ export class Plan {
             }
         }
         rowPlan = rowPlan.sort((a, b) => { return a.conditionCount - b.conditionCount >= 0 ? 1 : -1 }).reverse();
-                
+
         for (var i = 0; i < rowPlan.length; i++) {
             let selectedFoods =
                 this.sourceFoods.filter(x =>
