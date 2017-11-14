@@ -28,6 +28,7 @@
         mainPart?: MainPartType;
         type?: FoodType;
         difficulty?: DifficultyType;
+        description?: string;
     }
 
     export enum MainPartType {
@@ -56,6 +57,8 @@
         id: number;
         name: string;
         lock: boolean;
+        showDescription?: boolean;
+        description?: string;
     }
 
     export class PhaseModel {

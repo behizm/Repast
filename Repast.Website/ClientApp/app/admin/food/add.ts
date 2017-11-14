@@ -2,6 +2,7 @@
 import { autoinject } from 'aurelia-framework';
 import { AdminService } from './service';
 import { ValidationRules, ValidationController, validateTrigger } from 'aurelia-validation';
+import * as $ from 'jquery';
 
 @autoinject
 export class Add {
@@ -16,7 +17,9 @@ export class Add {
 
     bind() { }
 
-    attached() { }
+    attached() {
+        $('.ui.dropdown').dropdown();
+    }
 
     foodModel: Models.FoodModel = new Models.FoodModel();
     addFoodResult: Models.ResultModel;
@@ -28,6 +31,7 @@ export class Add {
             .ensure((x: Models.FoodModel) => x.mainPart).displayName('Main Part').required()
             .ensure((x: Models.FoodModel) => x.type).displayName('Food Type').required()
             .ensure((x: Models.FoodModel) => x.difficulty).displayName('Difficulty').required()
+            .ensure((x: Models.FoodModel) => x.description).maxLength(512)
             .on(this.foodModel);
     }
 
@@ -50,6 +54,8 @@ export class Add {
                     this.foodModel.mainPart = undefined;
                     this.foodModel.difficulty = undefined;
                     this.foodModel.type = undefined;
+                    this.foodModel.description = "";
+                    $('.ui.dropdown').dropdown("clear");
                 });
             }
         });

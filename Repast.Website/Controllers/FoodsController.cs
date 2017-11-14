@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Repast.Website.Models;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using System.Linq;
 
@@ -12,10 +11,12 @@ namespace Repast.Website.Controllers
     public class FoodsController : Controller
     {
         private FoodJsonContext foodContext;
+        private DescriptionJsonContext descriptionContext;
 
         public FoodsController(IHostingEnvironment environment)
         {
             foodContext = new FoodJsonContext(environment.ContentRootPath);
+            descriptionContext = new DescriptionJsonContext(environment.ContentRootPath);
         }
 
 
@@ -28,10 +29,15 @@ namespace Repast.Website.Controllers
         [HttpGet("{id}", Name = "GetFood")]
         public IActionResult GetFood(int id)
         {
-            var food = foodContext.Data.FirstOrDefault(x => x.id == id);
+            var food = this.foodContext.Data.FirstOrDefault(x => x.id == id);
             if (food == null)
             {
                 return NotFound();
+            }
+            var descriptionItem = this.descriptionContext.Data.FirstOrDefault(x => x.foodId == id);
+            if (descriptionItem != null)
+            {
+                food.description = descriptionItem.description;
             }
             return new OkObjectResult(food);
         }
@@ -59,6 +65,16 @@ namespace Repast.Website.Controllers
             };
             this.foodContext.Data.Add(newFood);
             this.foodContext.SaveChanges();
+            if (!string.IsNullOrEmpty(model.description))
+            {
+                var newDescription = new FoodDescriptionModel
+                {
+                    foodId = newFood.id,
+                    description = model.description
+                };
+                this.descriptionContext.Data.Add(newDescription);
+                this.descriptionContext.SaveChanges();
+            }
             return new OkObjectResult(newFood);
         }
 
@@ -79,7 +95,7 @@ namespace Repast.Website.Controllers
                 return NotFound();
             }
             model.name = model.name.Trim();
-            var duplicatedFood = foodContext.Data.FirstOrDefault(x => 
+            var duplicatedFood = foodContext.Data.FirstOrDefault(x =>
                 x.name.Equals(model.name, System.StringComparison.OrdinalIgnoreCase) && x.id != model.id);
             if (duplicatedFood != null)
             {
@@ -90,6 +106,32 @@ namespace Repast.Website.Controllers
             food.type = model.type.Value;
             food.difficulty = model.difficulty.Value;
             this.foodContext.SaveChanges();
+
+            var descriptionItem = this.descriptionContext.Data.FirstOrDefault(x => x.foodId == model.id);
+            if (descriptionItem == null && string.IsNullOrEmpty(model.description))
+            {
+                return Ok();
+            }
+
+            if (descriptionItem == null /*&& !string.IsNullOrEmpty(model.description)*/)
+            {
+                var newDescription = new FoodDescriptionModel
+                {
+                    foodId = model.id,
+                    description = model.description
+                };
+                this.descriptionContext.Data.Add(newDescription);
+            }
+            else if (descriptionItem != null && string.IsNullOrEmpty(model.description))
+            {
+                this.descriptionContext.Data.Remove(descriptionItem);
+            }
+            else /*if (descriptionItem != null && !string.IsNullOrEmpty(model.description))*/
+            {
+                descriptionItem.description = model.description;
+            }
+            this.descriptionContext.SaveChanges();
+
             return Ok();
         }
 
@@ -103,6 +145,12 @@ namespace Repast.Website.Controllers
             }
             this.foodContext.Data.Remove(food);
             this.foodContext.SaveChanges();
+            var descriptionItem = this.descriptionContext.Data.FirstOrDefault(x => x.foodId == id);
+            if (descriptionItem != null)
+            {
+                this.descriptionContext.Data.Remove(descriptionItem);
+                this.descriptionContext.SaveChanges();
+            }
             return Ok();
         }
 

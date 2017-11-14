@@ -2,7 +2,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div aurelia-app="boot">Loading...</div>
+<div aurelia-app="boot">
+    <div style="text-align: center;">
+        <i class="asterisk loading icon"></i>
+    </div>
+</div>
 
 @section scripts {
     <script type="text/javascript" src="~/dist/vendor.js" asp-append-version="true"></script>

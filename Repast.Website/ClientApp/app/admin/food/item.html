@@ -6,7 +6,23 @@
     </div>
     <div class="ui attached segment">
         <div class="ui grid">
-            <div class="row centered">
+            <div class="row centered" if.bind="!isLoading && !foodItem">
+                <div class="sixteen wide mobile eight wide tablet six wide computer column">
+                    <div class="ui negative message">
+                        <div class="header">
+                            Food not found.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row centered" if.bind="isLoading">
+                <div style="text-align: center;">
+                    <i class="asterisk loading icon"></i>
+                </div>
+            </div>
+
+            <div class="row centered" if.bind="!isLoading && foodItem">
                 <div class="sixteen wide mobile eight wide tablet six wide computer column">
                     <table class="ui very basic celled table">
                         <tbody>
@@ -34,11 +50,20 @@
                                 </td>
                                 <td>${foodItem.difficulty | difficultyTypeToText}</td>
                             </tr>
+                            <tr>
+                                <td class="right aligned">
+                                    <h4>Description</h4>
+                                </td>
+                                <td>
+                                    <small>${foodItem.description}</small>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="row centered">
+
+            <div class="row centered" if.bind="!isLoading && foodItem">
                 <div class="sixteen wide mobile eight wide tablet six wide computer column" style="text-align: center;">
                     <div class="two ui buttons">
                         <a if.bind="foodItem.id" route-href="route: editFood; params.bind: { id : foodItem.id }"
@@ -46,7 +71,7 @@
                             <i class="write icon"></i>
                             Edit
                         </a>
-                        <button click.delegate="deleteFood(foodItem.id)"
+                        <button click.delegate="onDeleteClicked()"
                                 class="ui red basic button">
                             <i class="trash outline icon"></i>
                             Delete
@@ -61,6 +86,23 @@
             <i class="chevron left icon"></i>
             Back To List
         </a>
+    </div>
+
+    <div class="ui basic modal delete-food-modal" if.bind="modalId" id="${modalId}">
+        <div class="ui icon header">
+            <i class="trash icon"></i>
+            Are you sure to delete
+            <i>${foodItem.name}</i>?
+        </div>
+        <div class="actions" style="text-align: center;">
+            <div class="ui red inverted button" click.delegate="deleteFood()">
+                <i class="trash outline icon"></i>
+                Yes
+            </div>
+            <div class="ui cancel inverted button">
+                No
+            </div>
+        </div>
     </div>
 
 </template>

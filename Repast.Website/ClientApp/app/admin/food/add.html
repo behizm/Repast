@@ -37,7 +37,7 @@
                     </div>
                     <div class="field" validation-errors.bind="mainPartErrors">
                         <label>Main Part</label>
-                        <select value.bind="foodModel.mainPart & validate">
+                        <select value.bind="foodModel.mainPart & validate" class="ui dropdown">
                             <option model.bind="null"></option>
                             <option model.bind="1">Meal</option>
                             <option model.bind="2">Chicken</option>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="field" validation-errors.bind="typeErrors">
                         <label>Food Type</label>
-                        <select value.bind="foodModel.type & validate">
+                        <select value.bind="foodModel.type & validate" class="ui dropdown">
                             <option model.bind="null"></option>
                             <option model.bind="1">Stew</option>
                             <option model.bind="2">Rice</option>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="field" validation-errors.bind="difficultyErrors">
                         <label>Difficulty</label>
-                        <select value.bind="foodModel.difficulty & validate">
+                        <select value.bind="foodModel.difficulty & validate" class="ui dropdown">
                             <option model.bind="null"></option>
                             <option model.bind="1">Very Low</option>
                             <option model.bind="2">Low</option>
@@ -78,6 +78,16 @@
                             <option model.bind="5">Very High</option>
                         </select>
                         <div class="field error" repeat.for="errorInfo of difficultyErrors">
+                            <label>
+                                <i class="warning icon"></i>
+                                ${errorInfo.error.message}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="field" validation-errors.bind="descriptionErrors">
+                        <label>Description</label>
+                        <textarea value.bind="foodModel.description & validate" rows="4"></textarea>
+                        <div class="field error" repeat.for="errorInfo of descriptionErrors">
                             <label>
                                 <i class="warning icon"></i>
                                 ${errorInfo.error.message}

@@ -2,13 +2,17 @@
 import { autoinject } from 'aurelia-framework';
 import { PlanService } from './service';
 import { ValidationRules, ValidationController, validateTrigger } from 'aurelia-validation';
+import * as $ from 'jquery';
 
 @autoinject
 export class Plan {
 
     constructor(private planService: PlanService, private controller: ValidationController) {
-        planService.getAllFoods().then(r => this.sourceFoods = r);
         this.configValidations();
+    }
+
+    activate() {
+        this.planService.getAllFoods().then(r => this.sourceFoods = r);
     }
 
     sourceFoods: Models.FoodModel[];
@@ -186,4 +190,21 @@ export class Plan {
         this.foodPlan = foodPlanCopy;
     }
 
+    toggleDescription = (index1: number, index2: number): Promise<void> => {
+        if (this.foodPlan[index1][index2].showDescription !== undefined) {
+            const foodPlanCopy: Models.SimpleFoodModel[][] = Object.assign([], this.foodPlan);
+            foodPlanCopy[index1][index2].showDescription = !foodPlanCopy[index1][index2].showDescription;
+            this.foodPlan = foodPlanCopy;
+            return new Promise<void>(() => { return; });
+        }
+
+        return this.planService.getFood(this.foodPlan[index1][index2].id).then(r => {
+            const foodPlanCopy: Models.SimpleFoodModel[][] = Object.assign([], this.foodPlan);
+            foodPlanCopy[index1][index2].showDescription = true;
+            if (r) {
+                foodPlanCopy[index1][index2].description = r.description;
+            }
+            this.foodPlan = foodPlanCopy;
+        });        
+    }
 }

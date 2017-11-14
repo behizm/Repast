@@ -48,9 +48,9 @@
         </div>
         <div class="ui ${($index+1==innerSchema.length)?'bottom':''} attached segment" repeat.for="item of innerSchema">
             <div class="ui form">
-                <div class="inline fields" style="margin-bottom: 0;">
+                <div class="fields" style="margin-bottom: 0;">
                     <div class="three wide field">
-                        <select value.bind="item.mainPartType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui dropdown">
+                        <select value.bind="item.mainPartType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui fluid dropdown">
                             <option model.bind="null"></option>
                             <option model.bind="1">Meal</option>
                             <option model.bind="2">Chicken</option>
@@ -59,7 +59,7 @@
                         </select>
                     </div>
                     <div class="three wide field">
-                        <select value.bind="item.foodType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui dropdown">
+                        <select value.bind="item.foodType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui fluid dropdown">
                             <option model.bind="null"></option>
                             <option model.bind="1">Stew</option>
                             <option model.bind="2">Rice</option>
@@ -68,7 +68,7 @@
                         </select>
                     </div>
                     <div class="three wide field">
-                        <select value.bind="item.difficultyType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui dropdown">
+                        <select value.bind="item.difficultyType" disabled.bind="foodPlan[$parent.$index][$index].name" class="ui fluid dropdown">
                             <option model.bind="null"></option>
                             <option model.bind="1">Very Low</option>
                             <option model.bind="2">Low</option>
@@ -77,7 +77,7 @@
                             <option model.bind="5">Very High</option>
                         </select>
                     </div>
-                    <div class="seven wide field">
+                    <div class="six wide field">
                         <button click.delegate="getFood($parent.$index,$index)"
                                 disabled.bind="foodPlan[$parent.$index][$index].lock"
                                 class="ui icon basic button">
@@ -94,6 +94,25 @@
                            style="margin-left: 5px;"
                            class="ui ${foodPlan[$parent.$index][$index].lock ? 'yellow lock' : 'grey unlock'} icon">
                         </i>
+                    </div>
+                    <div class="one wide field" style="text-align: right;">
+                        <button if.bind="foodPlan[$parent.$index][$index].name" click.delegate="toggleDescription($parent.$index,$index)"
+                                class="ui circular icon button">
+                            <i class="ellipsis vertical icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div if.bind="foodPlan[$parent.$index][$index].showDescription"
+                     class="fields" style="margin-bottom: 0;">
+                    <div class="sixteen wide field">
+                        <div class="ui divider" style="margin-bottom: 0;"></div>
+                        <div>
+                            <b style="margin-right: 10px;">Description:</b>
+                            <small if.bind="!foodPlan[$parent.$index][$index].description">No description</small>
+                            <span if.bind="foodPlan[$parent.$index][$index].description">
+                                ${foodPlan[$parent.$index][$index].description}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

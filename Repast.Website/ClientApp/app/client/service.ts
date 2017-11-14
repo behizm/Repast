@@ -47,4 +47,8 @@ export class PlanService {
     getRandom = (min: number, max: number): number => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
+    getFood = (id: number): Promise<Models.FoodModel> => {
+        return this.httpClient.fetch(`${this.apiUrl}/${id}`).then(r => r.json()).catch(e => { return null; });
+    }
 }

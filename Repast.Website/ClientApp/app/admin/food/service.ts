@@ -14,7 +14,7 @@ export class AdminService {
     }
 
     getFood = (id: number): Promise<Models.FoodModel> => {
-        return this.httpClient.fetch(`${this.foodsApiUrl}/${id}`).then(r => r.json());
+        return this.httpClient.fetch(`${this.foodsApiUrl}/${id}`).then(r => r.json()).catch(e => { return null; });
     }
 
     addFood = (food: Models.FoodModel): Promise<Models.HttpResultModel> => {

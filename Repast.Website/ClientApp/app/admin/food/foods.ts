@@ -8,7 +8,7 @@ export class Foods {
 
     foodsList: Models.FoodModel[];
 
-    activate = (): void => {
+    activate() {
         this.adminService.getAllFoods().then(r => this.foodsList = r);
     }
 }
