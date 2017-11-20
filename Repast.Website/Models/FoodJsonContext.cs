@@ -60,34 +60,35 @@ namespace Repast.Website.Models
 
         private IList<FoodModel> GetDefaultFoods()
         {
-            return new List<FoodModel>
-      {
-           new FoodModel { id= 1, name= "Zereshk Polo", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
-           new FoodModel { id= 2, name= "Reshte Polo ba Morgh", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
-           new FoodModel { id= 3, name= "Havij Polo", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
-           new FoodModel { id= 4, name= "Sabzi Polo ba Morgh", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
-           new FoodModel { id= 5, name= "Polo Yoonani", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
-           new FoodModel { id= 6, name= "Khorak ba Morgh", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 7, name= "Chicken Straganov", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 8, name= "Corden Blue", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.low },
-           new FoodModel { id= 9, name= "Sandwich Morgh Doodi", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 10, name= "Morghe Feri ba Sabzijat", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 11, name= "Morghe Sokhari", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.low },
-           new FoodModel { id= 12, name= "Ghormeh Sabzi", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
-           new FoodModel { id= 13, name= "Gheymeh", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
-           new FoodModel { id= 14, name= "Fesenjoon", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
-           new FoodModel { id= 15, name= "Gheymeh Bademjan", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
-           new FoodModel { id= 16, name= "Baghali Polo", mainPart= MainPartType.meal, type= FoodType.rice, difficulty= DifficultyType.high },
-           new FoodModel { id= 17, name= "Loobia Polo", mainPart= MainPartType.meal, type= FoodType.rice, difficulty= DifficultyType.medium },
-           new FoodModel { id= 18, name= "Kalam Polo", mainPart= MainPartType.meal, type= FoodType.rice, difficulty= DifficultyType.medium },
-           new FoodModel { id= 19, name= "Kotlet", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 20, name= "Khorak ba Gosht", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 21, name= "Beef Straganov", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 22, name= "Haleem Bademjan", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.high },
-           new FoodModel { id= 23, name= "Lazania", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 24, name= "Spagetti ba Ghosht", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
-           new FoodModel { id= 25, name= "Mirza Ghasemi", mainPart= MainPartType.vegetables, type= FoodType.bread, difficulty= DifficultyType.medium },
-      };
+            return new List<FoodModel>();
+            //      return new List<FoodModel>
+            //{
+            //     new FoodModel { id= 1, name= "Zereshk Polo", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 2, name= "Reshte Polo ba Morgh", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 3, name= "Havij Polo", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 4, name= "Sabzi Polo ba Morgh", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 5, name= "Polo Yoonani", mainPart= MainPartType.chicken, type= FoodType.rice, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 6, name= "Khorak ba Morgh", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 7, name= "Chicken Straganov", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 8, name= "Corden Blue", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.low },
+            //     new FoodModel { id= 9, name= "Sandwich Morgh Doodi", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 10, name= "Morghe Feri ba Sabzijat", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 11, name= "Morghe Sokhari", mainPart= MainPartType.chicken, type= FoodType.bread, difficulty= DifficultyType.low },
+            //     new FoodModel { id= 12, name= "Ghormeh Sabzi", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
+            //     new FoodModel { id= 13, name= "Gheymeh", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
+            //     new FoodModel { id= 14, name= "Fesenjoon", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
+            //     new FoodModel { id= 15, name= "Gheymeh Bademjan", mainPart= MainPartType.meal, type= FoodType.stew, difficulty= DifficultyType.high },
+            //     new FoodModel { id= 16, name= "Baghali Polo", mainPart= MainPartType.meal, type= FoodType.rice, difficulty= DifficultyType.high },
+            //     new FoodModel { id= 17, name= "Loobia Polo", mainPart= MainPartType.meal, type= FoodType.rice, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 18, name= "Kalam Polo", mainPart= MainPartType.meal, type= FoodType.rice, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 19, name= "Kotlet", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 20, name= "Khorak ba Gosht", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 21, name= "Beef Straganov", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 22, name= "Haleem Bademjan", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.high },
+            //     new FoodModel { id= 23, name= "Lazania", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 24, name= "Spagetti ba Ghosht", mainPart= MainPartType.meal, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //     new FoodModel { id= 25, name= "Mirza Ghasemi", mainPart= MainPartType.vegetables, type= FoodType.bread, difficulty= DifficultyType.medium },
+            //};
         }
 
         private void InitilizeFoodFile()

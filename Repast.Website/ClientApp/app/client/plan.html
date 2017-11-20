@@ -96,6 +96,10 @@
                         </i>
                     </div>
                     <div class="one wide field" style="text-align: right;">
+                        <button if.bind="!foodPlan[$parent.$index][$index].name" click.delegate="onSearchFoodClicked($parent.$index,$index)"
+                                class="ui circular icon button">
+                            <i class="search icon"></i>
+                        </button>
                         <button if.bind="foodPlan[$parent.$index][$index].name" click.delegate="toggleDescription($parent.$index,$index)"
                                 class="ui circular icon button">
                             <i class="ellipsis vertical icon"></i>
@@ -124,6 +128,43 @@
             <i class="lightning icon"></i>
             Generate Plan
         </button>
+    </div>
+
+    <div class="ui modal search-food-modal" if.bind="allowSearchModalCreate">
+        <div class="header">
+            Search Food
+        </div>
+        <div class="scrolling content">
+            <div class="ui grid">
+                <div class="ten wide column">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="Search..." value.bind="searchFoodText">
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+            </div>            
+            <div class="ui four column grid">
+                <div repeat.for="item of searchList" class="column">
+                    <a click.delegate="selectedFood.food=item" class="ui label">
+                        ${item.name}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div style="text-align: left;">
+                <b>Selected Food:</b>
+                <i>${selectedFood.food.name}</i>
+            </div>
+            <div class="ui divider"></div>
+            <div class="ui black deny button">
+                Nope
+            </div>
+            <button class="ui positive right labeled icon button" disabled.bind="!selectedFood.food" click.delegate="chooseFood()">
+                Yes, i like this.
+                <i class="checkmark icon"></i>
+            </button>
+        </div>
     </div>
 
 </template>

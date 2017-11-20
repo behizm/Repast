@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,12 @@
     <TypeScriptCompile Include="ClientApp\app\client\service.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\generalModels.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\value-converter.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="JsonData\**\*">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

@@ -57,7 +57,7 @@ namespace Repast.Website.Controllers
             }
             var newFood = new FoodModel
             {
-                id = this.foodContext.Data.Max(x => x.id) + 1,
+                id = this.foodContext.Data.Any() ? this.foodContext.Data.Max(x => x.id) + 1 : 1,
                 difficulty = model.difficulty.Value,
                 mainPart = model.mainPart.Value,
                 name = model.name,

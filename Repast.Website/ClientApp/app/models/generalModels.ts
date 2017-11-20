@@ -87,4 +87,9 @@
         inPhaseIndex: number;
         food: SimpleFoodModel;
     }
+
+    export class SearchFoodModel {
+        id: number;
+        name: string;
+    }
 }

@@ -1,5 +1,5 @@
 ﻿import { Models } from '../models/generalModels';
-import { autoinject } from 'aurelia-framework';
+import { autoinject, observable } from 'aurelia-framework';
 import { PlanService } from './service';
 import { ValidationRules, ValidationController, validateTrigger } from 'aurelia-validation';
 import * as $ from 'jquery';
@@ -19,6 +19,10 @@ export class Plan {
     phaseModel: Models.PhaseModel = new Models.PhaseModel();
     planSchema: Models.PlanModel[][] = [];
     foodPlan: Models.SimpleFoodModel[][] = [];
+    searchList: Models.SearchFoodModel[] = [];
+    allowSearchModalCreate: boolean = false;
+    selectedFood: any;
+    @observable searchFoodText: string | undefined = undefined;
 
     configValidations = (): void => {
         this.controller.validateTrigger = validateTrigger.changeOrBlur;
@@ -205,6 +209,51 @@ export class Plan {
                 foodPlanCopy[index1][index2].description = r.description;
             }
             this.foodPlan = foodPlanCopy;
-        });        
+        });
+    }
+
+    onSearchFoodClicked = (index1: number, index2: number): void => {
+        this.selectedFood = {
+            index1: index1,
+            index2: index2
+        };
+
+        if (this.searchFoodText === "") {
+            this.searchFoodText = undefined;
+        }
+        this.searchFoodText = "";
+        
+
+        this.allowSearchModalCreate = true;
+        setTimeout(() => {
+            $('.search-food-modal').modal("show");
+        }, 1);
+    }
+
+    chooseFood = (): void => {
+        let foodPlanCopy: Models.SimpleFoodModel[][] = Object.assign([], this.foodPlan);
+        foodPlanCopy[this.selectedFood.index1][this.selectedFood.index2] = {
+            id: this.selectedFood.food.id,
+            name: this.selectedFood.food.name,
+            lock: true,
+            showDescription: false
+        };
+        this.foodPlan = foodPlanCopy;
+    }
+
+    searchFoodTextChanged = (newValue: string, oldValue: string): void => {
+        if (this.searchFoodText === undefined) {
+            return;
+        }
+        this.searchList = [];
+        this.sourceFoods.forEach(x => {
+            const foodIndex = this.foodPlan.findIndex(a => a.findIndex(b => b.id == x.id) !== -1);
+            if (foodIndex === -1 && x.name.toLowerCase().indexOf(newValue.toLowerCase()) !== -1) {
+                this.searchList.push({
+                    id: x.id,
+                    name: x.name
+                });
+            }
+        });
     }
 }
