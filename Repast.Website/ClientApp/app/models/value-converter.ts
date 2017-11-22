@@ -2,13 +2,13 @@
     toView = (value: number): string => {
         switch (value) {
             case 1:
-                return "Meal";
+                return "گوشت قرمز";
             case 2:
-                return "Chicken";
+                return "گوشت سفید";
             case 3:
-                return "Sea";
+                return "دریایی";
             case 4:
-                return "Vegetables";
+                return "سبزیجات";
             default:
                 return "";
         }
@@ -19,13 +19,13 @@ export class FoodTypeToTextValueConverter {
     toView = (value: number): string => {
         switch (value) {
             case 1:
-                return "Stew";
+                return "خورشتی";
             case 2:
-                return "Rice";
+                return "پلویی";
             case 3:
-                return "Bread";
+                return "نانی";
             case 4:
-                return "Dish";
+                return "بشقاب";
             default:
                 return "";
         }
@@ -36,15 +36,15 @@ export class DifficultyTypeToTextValueConverter {
     toView = (value: number): string => {
         switch (value) {
             case 1:
-                return "Very Low";
+                return "خیلی ساده";
             case 2:
-                return "Low";
+                return "ساده";
             case 3:
-                return "Medium";
+                return "معمولی";
             case 4:
-                return "High";
+                return "سخت";
             case 5:
-                return "Very High";
+                return "خیلی سخت";
             default:
                 return "";
         }
